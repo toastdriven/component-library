@@ -4,21 +4,23 @@ import { useState } from 'preact/hooks';
 import './style.css';
 
 import Button from './components/Button';
+import ErrorBoundary from './components/ErrorBoundary';
 import Errors from './components/Errors';
+import Form from './components/Form';
 import {
-  Form,
   InlineFormRow,
   StackedFormRow,
-} from './components/Form';
+} from './components/FormRows';
 import Header from './components/Header';
 import Input from './components/Input';
 import Loading from './components/Loading';
 import Select from './components/Select';
 
 export function App() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [preferredComms, setPreferredComms] = useState("email");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [birthday, setBirthday] = useState('1999-01-01');
+  const [preferredComms, setPreferredComms] = useState('email');
 
   function fakeSubmit() {
     const data = {
@@ -38,13 +40,18 @@ export function App() {
     setPassword(newPassword);
   }
 
+  function changeBirthday(newBirthday) {
+    setBirthday(newBirthday);
+  }
+
   function changeComms(newComms) {
     setPreferredComms(newComms);
   }
 
-  function handleClear() {
+  function handleReset() {
     setUsername('');
     setPassword('');
+    setBirthday('1999-01-01');
     setPreferredComms('email');
   }
 
@@ -56,8 +63,9 @@ export function App() {
 
       <Errors
         messages={[
-          'Your feet smell.',
+          'These are example errors.',
           "You didn't fill out the form right.",
+          'Your feet smell.',
         ]}
       />
 
@@ -77,6 +85,15 @@ export function App() {
           />
         </InlineFormRow>
 
+        <InlineFormRow name="password" label="Password:">
+          <Input
+            type="password"
+            name="password"
+            value={password}
+            onChange={changePassword}
+          />
+        </InlineFormRow>
+
         <div className="text-black mx-auto my-4 w-5">
           <Loading />
         </div>
@@ -88,12 +105,12 @@ export function App() {
           />
         </div>
 
-        <StackedFormRow name="password" label="Password:">
+        <StackedFormRow name="birthday" label="Birthday:">
           <Input
-            type="password"
-            name="password"
-            value={password}
-            onChange={changePassword}
+            type="date"
+            name="birthday"
+            value={birthday}
+            onChange={changeBirthday}
           />
         </StackedFormRow>
 
@@ -121,9 +138,9 @@ export function App() {
           >...or...</span>
           <Button
             type="button"
-            label="Clear"
+            label="Reset"
             className="border-red-600 bg-red-300 text-white"
-            onClick={handleClear}
+            onClick={handleReset}
           />
         </div>
       </Form>
@@ -131,4 +148,4 @@ export function App() {
   );
 }
 
-render(<App />, document.getElementById('app'));
+render(<ErrorBoundary><App /></ErrorBoundary>, document.getElementById('app'));

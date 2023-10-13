@@ -1,3 +1,14 @@
+/**
+ * Either:
+ *
+ * <Loading />
+ *
+ * ...or...
+ *
+ * <Loading>
+ *   <img src="spinner.png" />
+ * </Loading>
+ */
 export default function Loading(props) {
   return (
     <div className="animate-spin h-6 w-6">
