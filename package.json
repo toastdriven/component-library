@@ -5,7 +5,7 @@
     "author": "Daniel Lindsley <daniel@toastdriven.com>",
     "description": "A collection of components built for Preact/React.",
     "repository": "https://github.com/toastdriven/component-library",
-    "license": "BSD-3-Clause",
+    "license": "Unlicense",
     "scripts": {
         "dev": "vite",
         "build": "vite build",

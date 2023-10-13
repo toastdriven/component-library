@@ -16,4 +16,6 @@ Because I end up rebuilding these a lot & am tired of rewriting them all the tim
 
 ## License
 
-New BSD
+[The Unlicense](https://unlicense.org) a.k.a. Public Domain
+
+Enjoy! :tada:
