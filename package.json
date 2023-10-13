@@ -1,0 +1,29 @@
+{
+    "name": "My Component Library",
+    "type": "module",
+    "version": "1.0.0",
+    "author": "Daniel Lindsley <daniel@toastdriven.com>",
+    "description": "A collection of components built for Preact/React.",
+    "repository": "https://github.com/toastdriven/component-library",
+    "license": "BSD-3-Clause",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "preact": "^10.18.1"
+    },
+    "devDependencies": {
+        "@preact/preset-vite": "^2.5.0",
+        "autoprefixer": "^10.4.16",
+        "eslint": "^8.51.0",
+        "eslint-config-preact": "^1.3.0",
+        "postcss": "^8.4.31",
+        "tailwindcss": "^3.3.3",
+        "vite": "^4.3.2"
+    },
+    "eslintConfig": {
+        "extends": "preact"
+    }
+}
