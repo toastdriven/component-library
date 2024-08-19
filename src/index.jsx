@@ -5,6 +5,10 @@ import { useState } from 'preact/hooks';
 import './style.css';
 
 import Avatar from './components/Avatar';
+import {
+  AutoCompleteInput,
+  AutoCompleteResult,
+} from './components/AutoCompleteInput';
 import Button from './components/Button';
 import ErrorBoundary from './components/ErrorBoundary';
 import Errors from './components/Errors';
@@ -16,6 +20,7 @@ import {
 import Header from './components/Header';
 import Input from './components/Input';
 import Loading from './components/Loading';
+import SearchInput from './components/SearchInput';
 import Select from './components/Select';
 
 export function App() {
@@ -23,12 +28,15 @@ export function App() {
   const [password, setPassword] = useState('');
   const [birthday, setBirthday] = useState('1999-01-01');
   const [preferredComms, setPreferredComms] = useState('email');
+  const [emergencyContact, setEmergencyContact] = useState('');
+  const [search, setSearch] = useState('');
 
   function fakeSubmit() {
     const data = {
       "username": username,
       "password": password,
       "preferred_comms": preferredComms,
+      "emergency_contact": emergencyContact,
     }
     console.log(`Faking a submit!`);
     console.log(data);
@@ -55,6 +63,14 @@ export function App() {
     setPassword('');
     setBirthday('1999-01-01');
     setPreferredComms('email');
+    setEmergencyContact('');
+  }
+
+  async function fakeAutoCompleteSearchFunc(query) {
+    return [
+      { name: 'John Doe' },
+      { name: 'Jane Doe' },
+    ];
   }
 
   return (
@@ -69,6 +85,12 @@ export function App() {
           "You didn't fill out the form right.",
           'Your feet smell.',
         ]}
+      />
+
+      <SearchInput
+        name="search-people"
+        value={search}
+        onChange={setSearch}
       />
 
       <Form onSubmit={fakeSubmit}>
@@ -168,6 +190,17 @@ export function App() {
               { name: 'Smoke Signals', value: 'smoke', disabled: true },
             ]}
             onChange={changeComms}
+          />
+        </StackedFormRow>
+
+        <StackedFormRow name="emergency-contact" label="Emergency Contact:">
+          <AutoCompleteInput
+            name="emergency-contact"
+            value={emergencyContact}
+            handleSearch={fakeAutoCompleteSearchFunc}
+            onChange={setEmergencyContact}
+            resultComponent={AutoCompleteResult}
+            minChars={1}
           />
         </StackedFormRow>
 
